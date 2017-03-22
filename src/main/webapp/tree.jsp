@@ -20,6 +20,10 @@
                 autoParam: ["id"]
             },
 
+            view: {
+                fontSize: "20px"
+            },
+
             callback: {
                 onClick: details
             }
@@ -54,6 +58,8 @@
             }
             add_tab(treeNode.name, 'user.jsp?id=' + treeNode.id);
         }
+
+
     </script>
 </head>
 
@@ -77,19 +83,23 @@
     </script>
 </div>
 
-<!-- left -->
-<!-- fit 自适应父容器，如果设置为true当使用body创建布局的时候，页面会自动最大,默认为false -->
 <div data-options="region:'west',title:'导航菜单',split:true"
      style="width: 180px;">
+    <div id="select" style="background:#E0ECFF">
+        <table style="width: 99%;">
+            <tr>
+                <td><a href="javascript:void(0)" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-search',plain:true">
+                </a></td>
+                <td><input style="width:100%"></input></td>
+                <td><a href="javascript:void(0)" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-reload',plain:true"></a></td>
+            </tr>
+        </table>
+    </div>
+
     <ul id="tree" class="ztree"></ul>
 </div>
-
-<!--
-<div class="easyui-tabs"
-     data-options="region:'center',fit:true,border:false" id="tabs">
-    <div title="首页" style="padding: 5px; display: block;"></div>
-</div>
--->
 
 <div data-options="region:'center'" style="background: #eee;">
     <div id="tabs" class="easyui-tabs" data-options="fit:true"></div>
