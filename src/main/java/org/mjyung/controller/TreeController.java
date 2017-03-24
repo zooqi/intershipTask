@@ -100,9 +100,4 @@ public class TreeController {
 
 		return new Node(id, name, isParent);
 	}
-	
-	@RequestMapping("/getIsParent")
-	public void getIsParent(String id){
-		System.out.println(id);
-	}
 }

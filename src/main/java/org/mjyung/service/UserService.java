@@ -1,10 +1,9 @@
 package org.mjyung.service;
 
-import java.util.List;
-
 import org.mjyung.dao.UserRepository;
 import org.mjyung.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,28 +16,66 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	@Autowired
 	UserRepository userRepository;
-/*
-	void addUser(String departId, String userAbbreviation, Integer userAge,
-			String userArrayNumber, String userBeforeName, Boolean userDelete,
-			String userEducation, Boolean userEnable, String userId,
-			String userLoginName, String userPassword, String usrPosition,
-			String userSex, String userTitle) {
-		return userRepository.addUser(departId, userAbbreviation, userAge,
-				userArrayNumber, userBeforeName, userDelete, userEducation,
-				userEnable, userId, userLoginName, userPassword, usrPosition,
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param userId
+	 *            用户唯一标识
+	 */
+	public void deleteUser(String userId) {
+		userRepository.deleteUsert(userId);
+	}
+
+	/**
+	 * 添加用户
+	 * 
+	 * @param user
+	 *            用户对象
+	 */
+	public void addUser(User user) {
+		userRepository.save(user);
+	}
+	
+	/**
+	 * 根据用户唯一标识查找用户信息
+	 * 
+	 * @param userId
+	 *            用户唯一标识
+	 * @return 用户对象
+	 */
+	public User getUser(String userId){
+		return userRepository.getUser(userId);
+	}
+
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param userId
+	 *            用户唯一标识
+	 * @param userAbbreviation
+	 *            用户简称
+	 * @param userAge
+	 *            用户年龄
+	 * @param userBeforeName
+	 *            用户曾用名
+	 * @param userChineseName
+	 *            用户中文名
+	 * @param userEducation
+	 *            用户学历
+	 * @param userPosition
+	 *            用户职务
+	 * @param userSex
+	 *            用户性别
+	 * @param userTitle
+	 *            用户职称
+	 */
+	public void updateUser(String userId, String userAbbreviation, int userAge,
+			String userBeforeName, String userChineseName,
+			String userEducation, String userPosition, String userSex,
+			String userTitle) {
+		userRepository.updateUser(userId, userAbbreviation, userAge,
+				userBeforeName, userChineseName, userEducation, userPosition,
 				userSex, userTitle);
 	}
-
-	void upadateUser(String userId) {
-		return userRepository.upadateUser(userId);
-	}
-
-	void deleteUser(String userId) {
-		return userRepository.upadateUser(userId);
-	}
-
-	List<User> selectUser(String userLoginName, String userId, String departId) {
-		return userRepository.selectUser(userLoginName, userId, departId);
-	}
-	*/
 }
