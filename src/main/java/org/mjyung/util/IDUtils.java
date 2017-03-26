@@ -11,10 +11,14 @@ import java.util.UUID;
 
 /**
  * 自动生成Id
+ *
  * @author mjyung
  * @since 2017.03.19
  */
 public class IDUtils {
+
+    private IDUtils() {
+    }
 
     /**
      * 获取独一无二的Id

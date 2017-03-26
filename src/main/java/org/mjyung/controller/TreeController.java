@@ -7,7 +7,6 @@
 package org.mjyung.controller;
 
 import com.google.gson.Gson;
-
 import org.mjyung.entity.Depart;
 import org.mjyung.entity.Node;
 import org.mjyung.entity.User;
@@ -16,13 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.annotation.Resource;
 
 /**
  * 显示树形结构的控制器层
@@ -50,7 +48,7 @@ public class TreeController {
 			@RequestParam(value = "id", required = false) String id)
 			throws IOException {
 
-		Gson gson = new Gson();
+        Gson gson = new Gson();
 
 		// 如果id为null, 代表这是zTree的第一次请求, 这时返回顶级部门
 		if (id == null) {

@@ -9,6 +9,7 @@ package org.mjyung.dao;
 import org.mjyung.entity.Depart;
 import org.mjyung.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +17,12 @@ import java.util.List;
 
 /**
  * 显示整棵树的接口
+ *
  * @author mjyung
  * @since 2017.03.20
  */
 @Transactional
-public interface TreeRepository extends JpaRepository<Depart, Long> {
+public interface TreeRepository extends JpaRepository<Depart, Long>, JpaSpecificationExecutor<Depart> {
 
     /**
      * 获取顶级部门列表
@@ -41,6 +43,7 @@ public interface TreeRepository extends JpaRepository<Depart, Long> {
 
     /**
      * 根据部门Id获取用户
+     *
      * @param departId
      * @return
      */
