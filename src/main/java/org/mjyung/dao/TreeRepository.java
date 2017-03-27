@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2017.03.20
  */
 @Transactional
-public interface TreeRepository extends JpaRepository<Depart, Long>, JpaSpecificationExecutor<Depart> {
+public interface TreeRepository extends JpaRepository<Depart, String>, JpaSpecificationExecutor<Depart> {
 
     /**
      * 获取顶级部门列表

@@ -22,14 +22,14 @@ public class DepartFiliationService {
     public void dump(String departId) {
         Objects.requireNonNull(departId, "departId不能为null!");
 
-        repository.deleteDepart(departId);
+        repository.delete(departId);
         repository.deleteAssociatedUsers(departId);
 
         // 查询此部门直接子部门的departId列表
         List<String> subIds = repository.findSubDepartIdsByDepartId(departId);
         if (subIds.size() != 0) {
             // 如果有直接子部门, 先删除此部门与这些直接子部门之间的关系
-            repository.deleteByDepartId(departId);
+            repository.delete(departId);
             // 递归地清理每个直接子部门
             for (String subId : subIds) {
                 dump(subId);

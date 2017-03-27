@@ -1,9 +1,3 @@
-/**
- * @ProjectName : intershipTask
- * @PackageName : org.mjyung.entity
- * @Description : TODO(描述文件的用途)
- * @CreationDate : 2017/3/20 11:12
- */
 package org.mjyung.entity;
 
 import java.io.Serializable;

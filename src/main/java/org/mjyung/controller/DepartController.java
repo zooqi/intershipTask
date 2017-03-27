@@ -25,108 +25,135 @@ import java.io.Writer;
 @Controller
 public class DepartController {
 
-    @Resource(name = "departService")
-    private DepartService departService;
+	@Resource(name = "departService")
+	private DepartService departService;
 
-    @Resource(name = "userService")
-    private UserService userService;
+	@Resource(name = "userService")
+	private UserService userService;
 
-    @Resource(name = "departFiliationService")
-    private DepartFiliationService departFiliationService;
+	@Resource(name = "departFiliationService")
+	private DepartFiliationService departFiliationService;
 
-    /**
-     * 获得一个判断是否是部门还是用户的参数(前端已判断)，并跳转到相应的页面
-     *
-     * @param departId 部门的唯一标识
-     * @param isParent 是部门还是用户
-     * @param request  请求
-     * @param response 响应
-     * @return 返回需要跳转的页面
-     */
-    @RequestMapping("/getDepartId")
-    public String getDepartId(String departId, HttpServletRequest request,
-                              HttpServletResponse response) {
-        Depart depart = departService.getDepart(departId);
+	/**
+	 * 跳转到depart.jsp
+	 *
+	 * @param departId
+	 *            部门的唯一标识
+	 * @param isParent
+	 *            是部门还是用户
+	 * @param request
+	 *            请求
+	 * @param response
+	 *            响应
+	 * @return 返回需要跳转的页面
+	 */
+	@RequestMapping("/getDepartId")
+	public String getDepartId(String departId, HttpServletRequest request,
+			HttpServletResponse response) {
+		Depart depart = departService.getDepart(departId);
 
-        request.setAttribute("departAbbreviation", depart.getDepartAbbreviation());
-        request.setAttribute("departBeforeName", depart.getDepartBeforeName());
-        request.setAttribute("departCommisionOffic", depart.getDepartCommisionOffic());
-        request.setAttribute("", depart.getDepartEnable());
-        request.setAttribute("departId", departId);
-        return "depart";
-    }
+		request.setAttribute("depart", depart);
 
-    /**
-     * 删除部门
-     *
-     * @param departId 部门的唯一标识
-     */
-    @RequestMapping("deleteDepart")
-    public void deleteDepart(HttpServletResponse response, Writer writer, @RequestParam(value = "departId",
-            required = true) String departId) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
+		return "depart";
+	}
 
-        departService.deleteDepart(departId);
-        writer.write("{\"success\":true}");
-    }
+	/**
+	 * 删除部门
+	 *
+	 * @param departId
+	 *            部门的唯一标识
+	 */
+	@RequestMapping("deleteDepart")
+	public void deleteDepart(HttpServletResponse response, Writer writer,
+			@RequestParam(value = "departId", required = true) String departId)
+			throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 
-    /**
-     * 添加部门
-     *
-     * @param departId             父部门departId
-     * @param departAbbreviation   部门简称
-     * @param departBeforeName     部门曾用名
-     * @param departCommisionOffic 是否为执法办
-     * @param departEnable         是否启动
-     * @return
-     */
-    @RequestMapping("/addDepart")
-    public void addDepart(HttpServletResponse response, Writer writer, @RequestParam(value = "departId",
-            required = true) String departId, String departAbbreviation,
-                          String departBeforeName, String departCommisionOffic,
-                          String departEnable) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
+		departService.deleteDepart(departId);
+		writer.write("{\"success\":true}");
+	}
 
-        // 自动生成departId
-        String id = IDUtils.generateID();
+	/**
+	 * 添加部门
+	 *
+	 * @param departId
+	 *            父部门departId
+	 * @param departAbbreviation
+	 *            部门简称
+	 * @param departBeforeName
+	 *            部门曾用名
+	 * @param departCommisionOffic
+	 *            是否为执法办
+	 * @param departEnable
+	 *            是否启动
+	 * @return
+	 */
+	@RequestMapping("/addDepart")
+	public void addDepart(HttpServletResponse response, Writer writer,
+			@RequestParam(value = "departId", required = true) String departId,
+			String departAbbreviation, String departBeforeName,
+			String departCommisionOffic, String departEnable)
+			throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 
-        // 添加部门
-        Depart depart = new Depart();
-        depart.setDepartId(id);
-        depart.setDepartAbbreviation(departAbbreviation);
-        depart.setDepartBeforeName(departBeforeName);
-        Boolean a;
-        if ("是".equals(departCommisionOffic)) {
-            a = true;
-        } else {
-            a = false;
-        }
-        Boolean b;
-        if ("是".equals(departEnable)) {
-            b = true;
-        } else {
-            b = false;
-        }
-        depart.setDepartCommisionOffic(a);
-        depart.setDepartEnable(b);
-        departService.addDepart(depart);
+		// 自动生成departId
+		String id = IDUtils.generateID();
 
-        /**
-         * 添加部门和子部门之间的关系
-         */
-        DepartFiliation departFiliation = new DepartFiliation();
-        departFiliation.setDepartId(departId);
-        departFiliation.setSubDepartId(id);
-        departFiliationService.register(departFiliation);
-        writer.write("{\"success\":true}");
-    }
+		// 添加部门
+		Depart depart = new Depart();
+		depart.setDepartId(id);
+		depart.setDepartAbbreviation(departAbbreviation);
+		depart.setDepartBeforeName(departBeforeName);
+		Boolean a;
+		if ("true".equals(departCommisionOffic)) {
+			a = true;
+		} else {
+			a = false;
+		}
+		Boolean b;
+		if ("true".equals(departEnable)) {
+			b = true;
+		} else {
+			b = false;
+		}
+		depart.setDepartCommisionOffic(a);
+		depart.setDepartEnable(b);
+		departService.addDepart(depart);
 
-    @RequestMapping("/updateDepart")
-    public String updateDepart(String departId1, String departAbbreviation1,
-                               String departBeforeName1, Boolean departCommisionOffic1,
-                               Boolean departEnable1) {
-        departService.updateDepart(departId1, departAbbreviation1,
-                departBeforeName1, departCommisionOffic1, departEnable1);
-        return "tree";
-    }
+		/**
+		 * 添加部门和子部门之间的关系
+		 */
+		DepartFiliation departFiliation = new DepartFiliation();
+		
+		departFiliation.setDepartId(departId);
+		departFiliation.setSubDepartId(id);
+		
+		departFiliationService.register(departFiliation);
+		
+		writer.write("{\"success\":true}");
+	}
+
+	/**
+	 * 更新部门信息
+	 * 
+	 * @param departId1
+	 *            部门唯一标识
+	 * @param departAbbreviation1
+	 *            部门简称
+	 * @param departBeforeName1
+	 *            部门曾用名
+	 * @param departCommisionOffic1
+	 *            是否为委员办
+	 * @param departEnable1
+	 *            是否启动
+	 * @return
+	 */
+	@RequestMapping("/updateDepart")
+	public String updateDepart(String departId1, String departAbbreviation1,
+			String departBeforeName1, Boolean departCommisionOffic1,
+			Boolean departEnable1) {
+		departService.updateDepart(departId1, departAbbreviation1,
+				departBeforeName1, departCommisionOffic1, departEnable1);
+		return "tree";
+	}
 }

@@ -15,18 +15,10 @@ import java.util.List;
 public class Depart implements Serializable {
 
     private static final long serialVersionUID = -7321699381286673240L;
-
-    /**
-     * ID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
     /**
      * 部门ID
      */
+    @Id
     @Column(name = "departId")
     private String departId;
 
@@ -85,14 +77,6 @@ public class Depart implements Serializable {
     private List<User> users;
 
     public Depart() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDepartId() {

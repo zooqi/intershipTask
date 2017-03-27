@@ -1,6 +1,7 @@
 package org.mjyung.entity;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 
 /**
@@ -17,16 +18,9 @@ public class User implements Serializable {
 	private static final Long serialVersionUID = 7419229779731522702L;
 
 	/**
-	 * ID
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
-
-	/**
 	 * 用户ID
 	 */
+	@Id
 	@Column(name = "userId")
 	private String userId;
 
@@ -113,15 +107,6 @@ public class User implements Serializable {
 	 */
 	@Column(name = "departId")
 	private String departId;
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getUserId() {
 		return userId;

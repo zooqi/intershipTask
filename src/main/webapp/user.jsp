@@ -18,7 +18,7 @@
 			href="javascript:void(0)" class="easyui-linkbutton"
 			data-options="iconCls:'icon-edit',plain:true">保存更新</a> <a
 			id="user_delete" href="javascript:void(0)" class="easyui-linkbutton"
-			data-options="iconCls:'icon-remove',plain:true">删除</a> 
+			data-options="iconCls:'icon-remove',plain:true">删除人员</a> 
 	</div>
 	<div id="table">
 		<form id="user_table_fm">
@@ -34,7 +34,7 @@
 					<input
 						name="userId1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center; width: 400px;width: 85%;"
-						readOnly="true" value='${userId}'/>
+						readOnly="true" value='${user.userId}'/>
 				</td>
 			</tr>
 			<tr>
@@ -42,13 +42,13 @@
 				<td width="140" bgcolor="#ffffff">
 					<input name="userAbbreviation1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userAbbreviation}' />
+						value='${user.userAbbreviation}' />
 				</td>
 				<td width="60" style="text-align: center;" bgcolor="#ffffff">曾用名</td>
 				<td width="120" bgcolor="#ffffff">
 					<input name="userBeforeName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userBeforeName}' />
+						value='${user.userBeforeName}' />
 				</td>
 			</tr>
 
@@ -57,13 +57,13 @@
 				<td width="120" bgcolor="#ffffff">
 					<input name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userChineseName}' />
+						value='${user.userChineseName}' />
 				</td>
 				<td width="95" style="text-align: center;" bgcolor="#ffffff">年龄</td>
 				<td width="140" bgcolor="#ffffff">
 					<input name="userAge1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userAge}' />
+						value='${user.userAge}' />
 				</td>
 			</tr>
 			<tr>
@@ -71,14 +71,14 @@
 				<td width="120" bgcolor="#ffffff">
 					<input name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userSex}' />
+						value='${user.userSex}' />
 				</td>
 
 				<td width="60" style="text-align: center;" bgcolor="#ffffff">职务</td>
 				<td width="120" bgcolor="#ffffff">
 					<input name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userPosition}' />
+						value='${user.userPosition}' />
 				</td>
 			</tr>
 			<tr>
@@ -86,14 +86,14 @@
 				<td width="140" bgcolor="#ffffff">
 					<input name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userEduction}' />
+						value='${user.userEducation}' />
 				</td>
 
 				<td width="60" style="text-align: center;" bgcolor="#ffffff">职称</td>
 				<td width="120" bgcolor="#ffffff">
 					<input name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${userTitle}' />
+						value='${user.userTitle}' />
 				</td>
 			</tr>
 		</table>
@@ -102,12 +102,11 @@
 	<script type="text/javascript">
 		/* 删除用户 */
 		$('#user_delete').click(function() {
-			alert('${userId}');
 			$.messager.confirm('确认', '确认删除该用户吗？', function(r) {
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'deleteUser?userId=' + '${userId}',
+						url : 'deleteUser?userId=' + '${user.userId}',
 
 					/*
 					success : function(data) {
@@ -134,7 +133,8 @@
 						data : $('#user_table_fm').serialize()
 					});
 					$.messager.alert('提示', '保存成功！');
-					//window.location.reload()
+					//window.navigate("user.jsp");
+					//location.reload(true);   
 				} 
 			});
 		});
