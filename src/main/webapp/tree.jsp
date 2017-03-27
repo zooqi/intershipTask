@@ -217,6 +217,8 @@
             <tr>
                 <td><a id="tree_reload" href="javascript:void(0)" class="easyui-linkbutton"
                        data-options="iconCls:'icon-reload',plain:true"> </a></td>
+                <td><a id="tree_expand" href="javascript:void(0)" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-more',plain:true"> </a></td>
                 <td><input id="tree_search_input" style="width: 95%;"/></td>
 
                 <!--
@@ -237,6 +239,9 @@
 <script type="text/javascript">
     $('#tree_reload').click(function () {
         reset();
+    });
+    $('#tree_expand').click(function () {
+        expandAll();
     });
 </script>
 

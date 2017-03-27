@@ -8,10 +8,13 @@ import org.mjyung.service.UserService;
 import org.mjyung.util.IDUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * depart控制器
@@ -59,13 +62,16 @@ public class DepartController {
      * @param departId 部门的唯一标识
      */
     @RequestMapping("deleteDepart")
-    public String deleteDepart(String departId) {
+    public void deleteDepart(HttpServletResponse response, Writer writer, @RequestParam(value = "departId",
+            required = true) String departId) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
+
         departService.deleteDepart(departId);
-        return "tree";
+        writer.write("{\"success\":true}");
     }
 
     /**
-     * 增加部门
+     * 添加部门
      *
      * @param departId             父部门departId
      * @param departAbbreviation   部门简称
@@ -75,20 +81,19 @@ public class DepartController {
      * @return
      */
     @RequestMapping("/addDepart")
-    public String addDepart(String departId, String departAbbreviation,
-                            String departBeforeName, String departCommisionOffic,
-                            String departEnable) {
-        /**
-         * 自动生成departId
-         */
+    public void addDepart(HttpServletResponse response, Writer writer, @RequestParam(value = "departId",
+            required = true) String departId, String departAbbreviation,
+                          String departBeforeName, String departCommisionOffic,
+                          String departEnable) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
+
+        // 自动生成departId
         String id = IDUtils.generateID();
 
-        /**
-         * 添加部门
-         */
+        // 添加部门
         Depart depart = new Depart();
-        depart.setDepartAbbreviation(departAbbreviation);
         depart.setDepartId(id);
+        depart.setDepartAbbreviation(departAbbreviation);
         depart.setDepartBeforeName(departBeforeName);
         Boolean a;
         if ("是".equals(departCommisionOffic)) {
@@ -96,7 +101,14 @@ public class DepartController {
         } else {
             a = false;
         }
+        Boolean b;
+        if ("是".equals(departEnable)) {
+            b = true;
+        } else {
+            b = false;
+        }
         depart.setDepartCommisionOffic(a);
+        depart.setDepartEnable(b);
         departService.addDepart(depart);
 
         /**
@@ -106,7 +118,7 @@ public class DepartController {
         departFiliation.setDepartId(departId);
         departFiliation.setSubDepartId(id);
         departFiliationService.register(departFiliation);
-        return "tree";
+        writer.write("{\"success\":true}");
     }
 
     @RequestMapping("/updateDepart")
