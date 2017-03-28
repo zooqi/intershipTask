@@ -33,11 +33,10 @@ public class DepartFiliationService {
 
 		if (subIds.size() != 0) {
 			/* 如果有直接子部门, 先删除此部门与这些直接子部门之间的关系 */
-			repository.deleteAsSubDepart(departId);
+			repository.deleteByDepartId(departId);
 			/* 递归地清理每个直接子部门 */
 			for (String subId : subIds) {
 				dump(subId);
-				System.out.println("subId="+subId);
 			}
 		} else {
 			/* 如果没有直接子部门, 那么删除此部门与其父部门之间的关系 */

@@ -40,6 +40,15 @@ public interface DepartFiliationRepository extends
 	@Modifying
 	@Query("DELETE FROM DepartFiliation WHERE subDepartId = ?1")
 	void deleteAsSubDepart(String departId);
+	
+	/** 
+	 * 根据departId删除此部门与其直接子部门的关系 
+	 * 
+	 * @param departId 
+	 */ 
+	 @Modifying 
+	 @Query("DELETE FROM DepartFiliation WHERE departId = ?1") 
+	 void deleteByDepartId(String departId); 
 
 	/**
 	 * 删除此部门下的用户
