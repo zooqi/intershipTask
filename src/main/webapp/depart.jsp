@@ -82,8 +82,8 @@
 						<tr>
 							<td width="100" style="text-align: center;">父部门标识</td>
 							<td width="100" colspan="3" style="text-align: center;"><input
-								class="easyui-validatebox" name="departId"
-								style="border: 0px; width: 300px" value='${depart.departId}'></input></td>
+								id="add_depart_departId" class="easyui-validatebox" name="departId" readOnly="true"
+								style="border: 0px; width: 300px"></input></td>
 						</tr>
 
 						<tr>
@@ -145,8 +145,8 @@
 						<tr>
 							<td width="100" style="text-align: center;">父部门标识</td>
 							<td width="100" colspan="3" style="text-align: center;"><input
-								class="easyui-validatebox" name="departId"
-								style="border: 0px; width: 300px" value='${depart.departId}'></input></td>
+								class="easyui-validatebox" name="departId" readOnly="true"
+								style="border: 0px; width: 300px" id=add_user_userId></input></td>
 						</tr>
 
 						<tr>
@@ -221,6 +221,7 @@
 
 
 	<script type="text/javascript">
+		var departId = '${depart.departId}';
 		/* 删除部门 */
 		$('#depart_delete').click(function() {
 			$.messager.confirm('确认', '确认删除吗？', function(r) {
@@ -241,7 +242,10 @@
 							}
 						},
 					});
+				} else {
+					$.messager.alert('提示', '删除失败，请稍后再试！');
 				}
+				$('#add_depart_departId').val(departId);
 			});
 		});
 
@@ -262,16 +266,17 @@
 								$('#depart_edit_dlg').dialog('close');
 								reset();
 								setTimeout("expandAll();", 500);
-								//window.location.reload();
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');
 							}
 						},
 					});
 				} else {
+					$.messager.alert('提示', '保存失败，请稍后再试！');
 					$('#depart_edit_dlg').dialog('close');
 				}
 				$('#depart_edit_fm').form('clear');
+				$('#add_depart_departId').val(departId);
 			});
 		});
 
@@ -296,34 +301,39 @@
 								$.messager.alert('提示', '保存失败，请稍后再试！');
 							}
 						},
-						error : function(request, error) {
-							$.messager.alert('提示', '保存失败，请稍后再试！');
-						}
 					});
 				} else {
+					$.messager.alert('提示', '保存失败，请稍后再试！');
 					$('#user_edit_dlg').dialog('close');
 				}
 				$("#user_edit_fm").form('clear');
+				$('#add_user_departId').val(departId);
 			});
 		});
 
 		/*更新部门信息*/
-		var url='updateDepart';
 		$('#depart_edit').click(function() {
 			$.messager.confirm('确认', '确认保存吗？', function(r) {
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : url,
-						data : $('#depart_table_fm').serialize()
+						url : 'updateDepart',
+						data : $('#depart_table_fm').serialize(),
+						success : function(data) {
+							if (data.success) {
+								$.messager.alert('提示', '保存成功！');
+								$('#depart_edit_dlg').dialog('close');
+							} else {
+								$.messager.alert('提示', '保存失败，请稍后再试！');
+							}
+						},
 					});
-					tab.panel('refresh', url);
-					$.messager.alert('提示', '保存成功！');
-					
-					//window.location.reload()
+				} else {
+					$.messager.alert('提示', '保存失败，请稍后再试！');
+					$('#depart_edit_dlg').dialog('close');
 				}
+				$("#depart_edit_fm").form('clear');
 			});
 		});
 	</script>
-
 </div>
