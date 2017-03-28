@@ -38,7 +38,7 @@ public interface DepartFiliationRepository extends
 	 * @param departId
 	 */
 	@Modifying
-	@Query("DELETE FROM DepartFiliation WHERE departId = ?1")
+	@Query("DELETE FROM DepartFiliation WHERE subDepartId = ?1")
 	void deleteAsSubDepart(String departId);
 
 	/**

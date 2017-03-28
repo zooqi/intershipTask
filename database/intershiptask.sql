@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-03-27 18:47:33
+Date: 2017-03-28 13:17:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,15 +34,15 @@ CREATE TABLE `depart` (
 -- ----------------------------
 -- Records of depart
 -- ----------------------------
-INSERT INTO `depart` VALUES ('1b8a9f73-212c-4481-b0c2-eb11b7eabb2e', '助理', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('62383f08-e966-46ee-805d-4ef93718213b', '会计部', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('6f29b93c-06f4-4c44-b86d-fb1a67906afc', '刷机包', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('75882f8c-a448-47a7-833b-8cb68aee3d2c', '后勤部', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('6599fdc3-35ee-48f8-956d-f0121328abeb', '小财务部', null, '', '\0', null, '\0', null);
 INSERT INTO `depart` VALUES ('85258-149kh-95471-hfu1235', '老板室', null, null, null, null, null, '');
-INSERT INTO `depart` VALUES ('85b86282-f31a-4d90-92c1-4772d5a9c22a', '秘书室', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('8d9ed5b5-b48b-470e-90c4-5aa3460e397f', ' 助理部', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('b04ca567-1a98-4f5e-ae57-e1314edf3a88', '会计部', null, '', '\0', null, '\0', null);
-INSERT INTO `depart` VALUES ('d59578d4-06e2-4f97-9a94-f1414e1cc0ca', '采办部', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('8787d91a-b22a-4894-9f94-ecc854253782', '小助理', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('a4e98b2a-c241-451f-b391-add0e61cd08a', '助理部', null, '小助理', '', null, '', null);
+INSERT INTO `depart` VALUES ('ad44bbe6-000a-48d9-8417-c6f870271c45', '账簿部', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('b29284d6-5a5f-4f9d-9b6f-0c973df1532a', '会计部', null, '', '', null, '', null);
+INSERT INTO `depart` VALUES ('bef4cb06-4394-41f3-a09d-b18aa3633425', '大财务部', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('c4c3a698-4128-4790-b2e9-7f23e9ee545e', '赵六部', null, '', '\0', null, '\0', null);
+INSERT INTO `depart` VALUES ('d245c69e-e021-4e79-aec9-c756de4dce04', '秘书部', null, '', '\0', null, '\0', null);
 
 -- ----------------------------
 -- Table structure for depart_filiation
@@ -53,13 +53,19 @@ CREATE TABLE `depart_filiation` (
   `depart_id` varchar(255) DEFAULT NULL,
   `sub_depart_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of depart_filiation
 -- ----------------------------
-INSERT INTO `depart_filiation` VALUES ('1', '85258-149kh-95471-hfu1235', '8d9ed5b5-b48b-470e-90c4-5aa3460e397f');
-INSERT INTO `depart_filiation` VALUES ('2', '85258-149kh-95471-hfu1235', '85b86282-f31a-4d90-92c1-4772d5a9c22a');
+INSERT INTO `depart_filiation` VALUES ('3', '85258-149kh-95471-hfu1235', 'b29284d6-5a5f-4f9d-9b6f-0c973df1532a');
+INSERT INTO `depart_filiation` VALUES ('4', '85258-149kh-95471-hfu1235', 'a4e98b2a-c241-451f-b391-add0e61cd08a');
+INSERT INTO `depart_filiation` VALUES ('5', '85258-149kh-95471-hfu1235', 'd245c69e-e021-4e79-aec9-c756de4dce04');
+INSERT INTO `depart_filiation` VALUES ('6', 'a4e98b2a-c241-451f-b391-add0e61cd08a', '8787d91a-b22a-4894-9f94-ecc854253782');
+INSERT INTO `depart_filiation` VALUES ('7', 'b29284d6-5a5f-4f9d-9b6f-0c973df1532a', 'bef4cb06-4394-41f3-a09d-b18aa3633425');
+INSERT INTO `depart_filiation` VALUES ('8', 'bef4cb06-4394-41f3-a09d-b18aa3633425', '6599fdc3-35ee-48f8-956d-f0121328abeb');
+INSERT INTO `depart_filiation` VALUES ('9', '6599fdc3-35ee-48f8-956d-f0121328abeb', 'ad44bbe6-000a-48d9-8417-c6f870271c45');
+INSERT INTO `depart_filiation` VALUES ('10', 'ad44bbe6-000a-48d9-8417-c6f870271c45', 'c4c3a698-4128-4790-b2e9-7f23e9ee545e');
 
 -- ----------------------------
 -- Table structure for user
@@ -87,8 +93,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1a445c5d-c015-4d9b-a082-f9940dff042e', '85258-149kh-95471-hfu1235', '张三', '0', null, null, '', null, '本科', null, '', null, '', null, null);
-INSERT INTO `user` VALUES ('36d3eef2-4ed6-4d58-a37b-ed1eeeb3cb42', '907ddf70-d374-4ba8-9bb9-cd5fd61a4054', '张三', '0', null, null, '', null, '', null, '', null, '', null, null);
-INSERT INTO `user` VALUES ('ad55e8e4-7507-4488-a2b0-dfca100fe865', 'd59578d4-06e2-4f97-9a94-f1414e1cc0ca', '王五', '0', null, null, '', null, '大专', null, '', null, '', null, null);
-INSERT INTO `user` VALUES ('d12b6dcc-8681-4d0d-9bff-550060212503', '907ddf70-d374-4ba8-9bb9-cd5fd61a4054', '王五', '20', null, '张三', ',,,,,,,,', null, null, null, '', null, null, null, null);
-INSERT INTO `user` VALUES ('f2b9b41c-1ba7-4e3a-94df-df1b7b1cd351', '85258-149kh-95471-hfu1235', '李四', '0', null, null, '', null, '硕士', null, '', null, '', null, null);
+INSERT INTO `user` VALUES ('242f206a-9c3e-4799-b9b0-2d2c126c63ac', 'ad44bbe6-000a-48d9-8417-c6f870271c45', '王五', '0', null, null, '', null, '   ', null, '', null, '', null, null);
+INSERT INTO `user` VALUES ('68144177-41de-498f-a5c6-8dd5a3cca41d', 'a4e98b2a-c241-451f-b391-add0e61cd08a', '张三', '20', null, '', ',,,,', null, null, null, '', null, null, null, null);
+INSERT INTO `user` VALUES ('9c601dfb-9067-4e11-8b75-4d27284e011c', 'ad44bbe6-000a-48d9-8417-c6f870271c45', '赵六', '0', null, null, '', null, '   ', null, '', null, '', null, null);
