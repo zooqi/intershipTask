@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface DepartFiliationRepository extends
-		JpaRepository<DepartFiliation, String>,
+		JpaRepository<DepartFiliation, Long>,
 		JpaSpecificationExecutor<DepartFiliation> {
 
 	/**
@@ -22,6 +22,15 @@ public interface DepartFiliationRepository extends
 	 */
 	@Query("SELECT subDepartId FROM DepartFiliation WHERE departId = ?1")
 	List<String> findSubDepartIdsByDepartId(String departId);
+	
+	/**
+	 * 删除此部门
+	 *
+	 * @param departId
+	 */
+	@Modifying
+	@Query("DELETE FROM Depart WHERE departId = ?1")
+	void deleteDepartId(String departId);
 
 	/**
 	 * 删除此部门与其父部门之间的关系
@@ -29,7 +38,7 @@ public interface DepartFiliationRepository extends
 	 * @param departId
 	 */
 	@Modifying
-	@Query("DELETE FROM DepartFiliation WHERE subDepartId = ?1")
+	@Query("DELETE FROM DepartFiliation WHERE departId = ?1")
 	void deleteAsSubDepart(String departId);
 
 	/**

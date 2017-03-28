@@ -86,7 +86,8 @@ public class DepartController {
 	 *            是否为执法办
 	 * @param departEnable
 	 *            是否启动
-	 * @return
+	 * @throws IOException
+	 *             异常
 	 */
 	@RequestMapping("/addDepart")
 	public void addDepart(HttpServletResponse response, Writer writer,
@@ -124,12 +125,12 @@ public class DepartController {
 		 * 添加部门和子部门之间的关系
 		 */
 		DepartFiliation departFiliation = new DepartFiliation();
-		
+
 		departFiliation.setDepartId(departId);
 		departFiliation.setSubDepartId(id);
-		
+
 		departFiliationService.register(departFiliation);
-		
+
 		writer.write("{\"success\":true}");
 	}
 
@@ -146,14 +147,21 @@ public class DepartController {
 	 *            是否为委员办
 	 * @param departEnable1
 	 *            是否启动
-	 * @return
+	 * @throws IOException
+	 *             异常
 	 */
 	@RequestMapping("/updateDepart")
-	public String updateDepart(String departId1, String departAbbreviation1,
-			String departBeforeName1, Boolean departCommisionOffic1,
-			Boolean departEnable1) {
+	public void updateDepart(
+			HttpServletResponse response,
+			Writer writer,
+			@RequestParam(value = "departId1", required = true) String departId1,
+			String departAbbreviation1, String departBeforeName1,
+			Boolean departCommisionOffic1, Boolean departEnable1)
+			throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+
 		departService.updateDepart(departId1, departAbbreviation1,
 				departBeforeName1, departCommisionOffic1, departEnable1);
-		return "tree";
+		writer.write("{\"success\":true}");
 	}
 }

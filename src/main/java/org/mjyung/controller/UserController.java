@@ -1,13 +1,18 @@
 package org.mjyung.controller;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import org.mjyung.entity.User;
 import org.mjyung.service.UserService;
 import org.mjyung.util.IDUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * user控制器
@@ -41,10 +46,16 @@ public class UserController {
 	 * 
 	 * @param userId
 	 *            用户的唯一标识
+	 * @throws IOException
+	 *             异常
 	 */
 	@RequestMapping("/deleteUser")
-	public void deleteUser(String userId) {
+	public void deleteUser(HttpServletResponse response, Writer writer,
+			@RequestParam(value = "userId", required = true) String userId)
+			throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 		userService.deleteUser(userId);
+		writer.write("{\"success\":true}");
 	}
 
 	/**
@@ -71,11 +82,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/addUser")
-	public String addUser(String departId, String userAbbreviation,
-			String userAge, String userBeforeName, String userChineseName,
-			String userEducation, String userPosition, String userLoginName,
-			String userTitle) {
+	public void addUser(HttpServletResponse response, Writer writer,
+			@RequestParam(value = "departId", required = true) String departId,
+			String userAbbreviation, String userAge, String userBeforeName,
+			String userChineseName, String userEducation, String userPosition,
+			String userLoginName, String userTitle) throws IOException {
 		String userId = IDUtils.generateID();
+
+		response.setContentType("application/json;charset=UTF-8");
 
 		User user = new User();
 
@@ -97,7 +111,7 @@ public class UserController {
 		user.setDepartId(departId);
 
 		userService.addUser(user);
-		return "tree";
+		writer.write("{\"success\":true}");
 	}
 
 	/**
@@ -121,13 +135,18 @@ public class UserController {
 	 *            用户性别
 	 * @param userTitle1
 	 *            用户职称
+	 * @throws IOException
+	 *             异常
 	 */
 	@RequestMapping("updateUser")
-	String updateUser(String userId1, String userAbbreviation1,
-			String userAge1, String userBeforeName1, String userChineseName1,
-			String userEducation1, String userPosition1, String userSex1,
-			String userTitle1) {
-		System.out.println(userId1);
+	void updateUser(HttpServletResponse response, Writer writer,
+			@RequestParam(value = "userId1", required = true) String userId1,
+			String userAbbreviation1, String userAge1, String userBeforeName1,
+			String userChineseName1, String userEducation1,
+			String userPosition1, String userSex1, String userTitle1)
+			throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
+
 		int a = 0;
 		if (userAge1 != null && !userAge1.equals("")) {
 			a = Integer.parseInt(userAge1);
@@ -135,6 +154,6 @@ public class UserController {
 		userService.updateUser(userId1, userAbbreviation1, a, userBeforeName1,
 				userChineseName1, userEducation1, userPosition1, userSex1,
 				userTitle1);
-		return "tree";
+		writer.write("{\"success\":true}");
 	}
 }

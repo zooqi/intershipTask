@@ -171,7 +171,7 @@
 								style="border: 0px; width: 130px"></input></td>
 						</tr>
 						<tr>
-							<td width="60" style="text-align: center;">学历</td>
+							<td width="60" style="text-align: center;">最高学历</td>
 							<td width="120" style="text-align: center;"><select
 								class="easyui-combobox" name="userEducation"
 								data-options="validType:'length[0,32]'"
@@ -184,17 +184,17 @@
 									<option value="博士">博士</option>
 									<option value="其他">其他</option>
 							</select></td>
-							<td width="95" style="text-align: center;">职位</td>
+							<td width="95" style="text-align: center;">用户职位</td>
 							<td width="140" style="text-align: center;"><input
 								class="easyui-validatebox" name="userPosition"
 								style="border: 0px; width: 130px"></input></td>
 						</tr>
 						<tr>
-							<td width="60" style="text-align: center;">年龄</td>
+							<td width="60" style="text-align: center;">用户年龄</td>
 							<td width="120" style="text-align: center;"><input
 								class="easyui-validatebox" name="userAge"
 								style="border: 0px; width: 130px"></input></td>
-							<td width="95" style="text-align: center;">性别</td>
+							<td width="95" style="text-align: center;">用户性别</td>
 							<td width="140" style="text-align: center;"><select
 								class="easyui-combobox" name="userSex"
 								data-options="validType:'length[0,32]'"
@@ -234,6 +234,8 @@
 						success : function(data) {
 							if (data.success) {
 								$.messager.alert('提示', '删除成功！');
+								reset();
+								setTimeout("expandAll();", 500);
 							} else {
 								$.messager.alert('提示', '删除失败，请稍后再试！');
 							}
@@ -260,6 +262,7 @@
 								$('#depart_edit_dlg').dialog('close');
 								reset();
 								setTimeout("expandAll();", 500);
+								//window.location.reload();
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');
 							}
@@ -286,6 +289,9 @@
 						success : function(data) {
 							if (data.success) {
 								$.messager.alert('提示', '保存成功！');
+								$('#user_edit_dlg').dialog('close');
+								reset();
+								setTimeout("expandAll();", 500);
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');
 							}
@@ -302,15 +308,18 @@
 		});
 
 		/*更新部门信息*/
+		var url='updateDepart';
 		$('#depart_edit').click(function() {
 			$.messager.confirm('确认', '确认保存吗？', function(r) {
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'updateDepart',
+						url : url,
 						data : $('#depart_table_fm').serialize()
 					});
+					tab.panel('refresh', url);
 					$.messager.alert('提示', '保存成功！');
+					
 					//window.location.reload()
 				}
 			});
