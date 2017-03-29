@@ -34,29 +34,42 @@
 	};
 
 	/* 添加tab */
-	function add_tab(title, url) {
-		if (!$('#tree_tabs').tabs('exists', title)) {
-			$('#tree_tabs').tabs('add', {
-				title : title,
-				href : url,
-				closable : true
-			});
-		} else {
-			$('#tree_tabs').tabs('select', title);
-			var tab = $('#tree_tabs').tabs('getSelected');
-			tab.panel('refresh', url);
-		}
+	function add_tab(id, title, url) {
+        var index;
+        var exists = false; //要添加的是否已存在
+        var tabs = $('#tree_tabs').tabs('tabs');
+        for (var i = 0; i < tabs.length; i++) {
+            var tabId = tabs[i].panel('options').id;
+            var tabIndex = $('#tree_tabs').tabs('getTabIndex', tabs[i]);
+            if (id != tabId) {
+                $('#tree_tabs').tabs('close', tabIndex);
+            } else {
+                index = tabIndex;
+                exists = true;
+            }
+        }
+
+        if (!exists) {
+            $('#tree_tabs').tabs('add', {
+                title: title,
+                href: url,
+                closeable: true,
+                id: id
+            })
+        } else {
+            $('#tree_tabs').tabs('getTab', index).panel('refresh', url);
+        }
 	}
-	
-	/* 点击显示详情 */
-	function details(event, treeId, treeNode) {
-		/* 如果是部门 */
-		if (treeNode.isParent) {
-			add_tab(treeNode.name, 'getDepartId?departId=' + treeNode.id);
-			return;
-		}
-		add_tab(treeNode.name, 'getUserId?userId=' + treeNode.id);
-	}
+
+    /* 点击显示详情 */
+    function details(event, treeId, treeNode) {
+        /* 如果是部门 */
+        if (treeNode.isParent) {
+            add_tab(treeNode.id, treeNode.name, 'getDepartId?departId=' + treeNode.id);
+            return;
+        }
+        add_tab(treeNode.id, treeNode.name, 'getUserId?userId=' + treeNode.id);
+    }
 
 	function beforeAsync() {
 		curAsyncCount++;
