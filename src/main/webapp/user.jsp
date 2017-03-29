@@ -32,7 +32,7 @@
 					<td width="140" bgcolor="#ffffff" colspan="3"><input
 						name="userId1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center; width: 400px; width: 85%;"
-						readOnly="true" id='add_user_userId' /></td>
+						readOnly="true" value='${user.userId}' /></td>
 				</tr>
 				<tr>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">用户简称</td>
@@ -88,7 +88,6 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-	var userId='{user.userId}';
 		/* 删除用户 */
 		$('#user_delete').click(function() {
 			$.messager.confirm('确认', '确认删除该用户吗？', function(r) {
@@ -96,8 +95,8 @@
 					$.ajax({
 						type : 'POST',
 						url : 'deleteUser',
-						data :{
-							userId:'${user.userId}'
+						data : {
+							userId : '${user.userId}'
 						},
 						success : function(data) {
 							if (data.success) {
@@ -109,38 +108,29 @@
 							}
 						},
 					});
-				}else{
-					$.messager.alert('提示', '删除失败，请稍后再试！');
-					$('#add_user_userId').val(userId);
 				}
 			});
 		});
 
 		/*更新用户信息*/
 		$('#user_edit').click(function() {
-			var url='updateUser';
 			$.messager.confirm('确认', '确认保存吗？', function(r) {
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : url,
+						url : 'updateUser',
 						data : $('#user_table_fm').serialize(),
 						success : function(data) {
 							if (data.success) {
 								$.messager.alert('提示', '保存成功！');
 								$('#user_edit_dlg').dialog('close');
-								tab.panel('refresh', url);
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');
 							}
 						},
 					});
-				} else {
-					$.messager.alert('提示', '保存失败，请稍后再试！');
-					$('#user_edit_dlg').dialog('close');
 				}
 				$("#user_edit_fm").form('clear');
-				$('#add_user_userId').val(userId);
 			});
 		});
 	</script>

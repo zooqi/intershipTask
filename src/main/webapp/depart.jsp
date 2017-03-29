@@ -47,13 +47,23 @@
 						name="departAbbreviation1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departAbbreviation}'></td>
+					<td width="95" style="text-align: center;" bgcolor="#ffffff">是否一级部门</td>
+					<td width="140" bgcolor="#ffffff"><input name="departMain1"
+						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
+						value='${depart.departMain}'></td>
+				</tr>
+				<tr>
+					<td width="95" style="text-align: center;" bgcolor="#ffffff">中文名</td>
+					<td width="140" bgcolor="#ffffff"><input
+						name="departChineseName1"
+						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
+						value='${depart.departChineseName}'></td>
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">曾用名</td>
 					<td width="120" bgcolor="#ffffff"><input
 						name="departBeforeName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departBeforeName}'></td>
 				</tr>
-
 				<tr>
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">是否执法办</td>
 					<td width="120" bgcolor="#ffffff"><input
@@ -65,13 +75,24 @@
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departEnable}'></td>
 				</tr>
+				<tr>
+					<td width="95" style="text-align: center;" bgcolor="#ffffff">排列序号</td>
+					<td width="140" bgcolor="#ffffff"><input
+						name="departArrayNumber1"
+						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
+						value='${depart.departArrayNumber}'></td>
+					<td width="95" style="text-align: center;" bgcolor="#ffffff">是否删除</td>
+					<td width="140" bgcolor="#ffffff"><input name="departDelete1"
+						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
+						value='${depart.departDelete}'></td>
+				</tr>
 			</table>
 		</form>
 	</div>
 
 	<!-- 对话框:添加部门 -->
 	<div id="depart_edit_dlg" class="easyui-dialog"
-		style="padding: 0px 0px; width: 550px; height: 220px;"
+		style="padding: 0px 0px; width: 550px; height: 300px;"
 		data-options="closed:true,buttons:'#depart_edit_dlg-buttons'">
 		<form id="depart_edit_fm">
 			<div id="depaert_edit_tabs" class="easyui-tabs">
@@ -79,13 +100,6 @@
 					<table class="zooqi-frame-text" border="1"
 						style="border-collapse: collapse; border: 2px solid #D6E3F4; margin-left: 3px; margin-right: 1px"
 						cellspacing="35%" cellpadding="8">
-						<tr>
-							<td width="100" style="text-align: center;">父部门标识</td>
-							<td width="100" colspan="3" style="text-align: center;"><input
-								id="add_depart_departId" class="easyui-validatebox" name="departId" readOnly="true"
-								style="border: 0px; width: 300px"></input></td>
-						</tr>
-
 						<tr>
 							<td width="95" style="text-align: center;">部门简称</td>
 							<td width="140" style="text-align: center;"><input
@@ -96,8 +110,31 @@
 								class="easyui-validatebox" name="departBeforeName"
 								style="border: 0px; width: 130px"></input></td>
 						</tr>
-
 						<tr>
+							<td width="60" style="text-align: center;">部门中文名</td>
+							<td width="120" style="text-align: center;"><input
+								class="easyui-validatebox" name="departChineseName"
+								style="border: 0px; width: 130px"></input></td>
+							<td width="60" style="text-align: center;">是否一级部门</td>
+							<td width="120" style="text-align: center;"><select
+								class="easyui-combobox" name="departMain"
+								data-options="validType:'length[0,32]'"
+								style="width: 144px; height: 23px">
+									<option value="   "></option>
+									<option value="true">true</option>
+									<option value="false">false</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td width="60" style="text-align: center;">是否删除</td>
+							<td width="120" style="text-align: center;"><select
+								class="easyui-combobox" name="departDelete"
+								data-options="validType:'length[0,32]'"
+								style="width: 144px; height: 23px">
+									<option value="   "></option>
+									<option value="true">true</option>
+									<option value="false">false</option>
+							</select></td>
 							<td width="60" style="text-align: center;">是否执法办</td>
 							<td width="120" style="text-align: center;"><select
 								class="easyui-combobox" name="departCommisionOffic"
@@ -107,6 +144,12 @@
 									<option value="true">true</option>
 									<option value="false">false</option>
 							</select></td>
+						</tr>
+						<tr>
+							<td width="60" style="text-align: center;">排列序号</td>
+							<td width="120" style="text-align: center;"><input
+								class="easyui-validatebox" name="departArrayNumber"
+								style="border: 0px; width: 130px"></input></td>
 							<td width="95" style="text-align: center;">是否启动</td>
 							<td width="140" style="text-align: center;"><select
 								class="easyui-combobox" name="departEnable"
@@ -134,7 +177,7 @@
 
 	<!-- 添加用户 -->
 	<div id="user_edit_dlg" class="easyui-dialog"
-		style="padding: 0px 0px; width: 570px; height: 290px;"
+		style="padding: 0px 0px; width: 570px; height: 265px;"
 		data-options="closed:true,buttons:'#user_edit_dlg-buttons'">
 		<form id="user_edit_fm">
 			<div id="user_edit_tabs" class="easyui-tabs">
@@ -142,13 +185,6 @@
 					<table class="zooqi-frame-text" border="1"
 						style="border-collapse: collapse; border: 2px solid #D6E3F4; margin-left: 3px; margin-right: 1px"
 						cellspacing="35%" cellpadding="8">
-						<tr>
-							<td width="100" style="text-align: center;">父部门标识</td>
-							<td width="100" colspan="3" style="text-align: center;"><input
-								class="easyui-validatebox" name="departId" readOnly="true"
-								style="border: 0px; width: 300px" id=add_user_userId></input></td>
-						</tr>
-
 						<tr>
 							<td width="95" style="text-align: center;">用户简称</td>
 							<td width="140" style="text-align: center;"><input
@@ -221,7 +257,6 @@
 
 
 	<script type="text/javascript">
-		var departId = '${depart.departId}';
 		/* 删除部门 */
 		$('#depart_delete').click(function() {
 			$.messager.confirm('确认', '确认删除吗？', function(r) {
@@ -242,10 +277,7 @@
 							}
 						},
 					});
-				} else {
-					$.messager.alert('提示', '删除失败，请稍后再试！');
 				}
-				$('#add_depart_departId').val(departId);
 			});
 		});
 
@@ -258,7 +290,7 @@
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'addDepart',
+						url : 'addDepart?departId=' + '${depart.departId}',
 						data : $('#depart_edit_fm').serialize(),
 						success : function(data) {
 							if (data.success) {
@@ -272,11 +304,9 @@
 						},
 					});
 				} else {
-					$.messager.alert('提示', '保存失败，请稍后再试！');
 					$('#depart_edit_dlg').dialog('close');
 				}
 				$('#depart_edit_fm').form('clear');
-				$('#add_depart_departId').val(departId);
 			});
 		});
 
@@ -289,7 +319,7 @@
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'addUser',
+						url : 'addUser?departId='+'${depart.departId}',
 						data : $('#user_edit_fm').serialize(),
 						success : function(data) {
 							if (data.success) {
@@ -303,11 +333,9 @@
 						},
 					});
 				} else {
-					$.messager.alert('提示', '保存失败，请稍后再试！');
 					$('#user_edit_dlg').dialog('close');
 				}
 				$("#user_edit_fm").form('clear');
-				$('#add_user_departId').val(departId);
 			});
 		});
 
@@ -328,9 +356,6 @@
 							}
 						},
 					});
-				} else {
-					$.messager.alert('提示', '保存失败，请稍后再试！');
-					$('#depart_edit_dlg').dialog('close');
 				}
 				$("#depart_edit_fm").form('clear');
 			});

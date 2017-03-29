@@ -71,7 +71,8 @@ public class DepartService {
 	 */
 	public void updateDepart(String departId, String departAbbreviation,
 			String departBeforeName, Boolean departCommisionOffic,
-			Boolean departEnable) {
+			Boolean departEnable, Boolean departDelete, Boolean departMain,
+			String departChineseName,String departArrayNumber) {
 		Objects.requireNonNull(departId, "departId不能为null!");
 
 		Depart depart = departDepository.findOne(departId);
@@ -80,6 +81,10 @@ public class DepartService {
 		depart.setDepartBeforeName(departBeforeName);
 		depart.setDepartCommisionOffic(departCommisionOffic);
 		depart.setDepartEnable(departEnable);
+		depart.setDepartArrayNumber(departArrayNumber);
+		depart.setDepartChineseName(departChineseName);
+		depart.setDepartDelete(departDelete);
+		depart.setDepartMain(departMain);
 		departDepository.save(depart);
 	}
 }

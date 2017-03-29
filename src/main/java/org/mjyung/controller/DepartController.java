@@ -93,8 +93,9 @@ public class DepartController {
 	public void addDepart(HttpServletResponse response, Writer writer,
 			@RequestParam(value = "departId", required = true) String departId,
 			String departAbbreviation, String departBeforeName,
-			String departCommisionOffic, String departEnable)
-			throws IOException {
+			String departCommisionOffic, String departEnable,
+			String departDelete, String departChineseName, String departMain,
+			String departArrayNumber) throws IOException {
 		response.setContentType("application/json;charset=UTF-8");
 
 		// 自动生成departId
@@ -111,14 +112,30 @@ public class DepartController {
 		} else {
 			a = false;
 		}
+		depart.setDepartCommisionOffic(a);
 		Boolean b;
 		if ("true".equals(departEnable)) {
 			b = true;
 		} else {
 			b = false;
 		}
-		depart.setDepartCommisionOffic(a);
 		depart.setDepartEnable(b);
+		Boolean c;
+		if ("true".equals(departDelete)) {
+			c = true;
+		} else {
+			c = false;
+		}
+		depart.setDepartDelete(c);
+		Boolean d;
+		if ("true".equals(departMain)) {
+			d = true;
+		} else {
+			d = false;
+		}
+		depart.setDepartDelete(d);
+		depart.setDepartArrayNumber(departArrayNumber);
+		depart.setDepartChineseName(departChineseName);
 		departService.addDepart(depart);
 
 		/**
@@ -156,12 +173,40 @@ public class DepartController {
 			Writer writer,
 			@RequestParam(value = "departId1", required = true) String departId1,
 			String departAbbreviation1, String departBeforeName1,
-			Boolean departCommisionOffic1, Boolean departEnable1)
+			String departCommisionOffic1, String departEnable1,
+			String departMain1, String departDelete1,
+			String departArrayNumber1, String departChineseName1)
 			throws IOException {
 		response.setContentType("application/json;charset=UTF-8");
 
+		Boolean a;
+		if ("true".equals(departCommisionOffic1)) {
+			a = true;
+		} else {
+			a = false;
+		}
+		Boolean b;
+		if ("true".equals(departEnable1)) {
+			b = true;
+		} else {
+			b = false;
+		}
+		Boolean c;
+		if ("true".equals(departDelete1)) {
+			c = true;
+		} else {
+			c = false;
+		}
+		Boolean d;
+		if ("true".equals(departMain1)) {
+			d = true;
+		} else {
+			d = false;
+		}
+
 		departService.updateDepart(departId1, departAbbreviation1,
-				departBeforeName1, departCommisionOffic1, departEnable1);
+				departBeforeName1, a, b, c, d, departChineseName1,
+				departArrayNumber1);
 		writer.write("{\"success\":true}");
 	}
 }
