@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
 public interface DepartFiliationRepository extends
 		JpaRepository<DepartFiliation, Long>,
 		JpaSpecificationExecutor<DepartFiliation> {

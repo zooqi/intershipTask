@@ -37,7 +37,7 @@
 				<tr>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">唯一标识</td>
 					<td width="400" bgcolor="#ffffff" colspan="3"><input
-						name="departId1"
+						name="departId1" id="depart_departId"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center; width: 400px; width: 85%;"
 						readOnly="true" value='${depart.departId}'></td>
 				</tr>
@@ -92,7 +92,7 @@
 
 	<!-- 对话框:添加部门 -->
 	<div id="depart_edit_dlg" class="easyui-dialog"
-		style="padding: 0px 0px; width: 550px; height: 300px;"
+		style="padding: 0px 0px; width: 550px; height: 270px;"
 		data-options="closed:true,buttons:'#depart_edit_dlg-buttons'">
 		<form id="depart_edit_fm">
 			<div id="depaert_edit_tabs" class="easyui-tabs">
@@ -281,6 +281,7 @@
 			});
 		});
 
+		
 		/* 保存部门 */
 		$('#depart_add_depart').click(function() {
 			$('#depart_edit_dlg').dialog('open').dialog('setTitle', '添加部门');
@@ -290,7 +291,7 @@
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'addDepart?departId=' + '${depart.departId}',
+						url : 'addDepart?departId=' + $('#depart_departId').val(),
 						data : $('#depart_edit_fm').serialize(),
 						success : function(data) {
 							if (data.success) {
@@ -319,7 +320,7 @@
 				if (r) {
 					$.ajax({
 						type : 'POST',
-						url : 'addUser?departId='+'${depart.departId}',
+						url : 'addUser?departId=' + $('#depart_departId').val(),
 						data : $('#user_edit_fm').serialize(),
 						success : function(data) {
 							if (data.success) {

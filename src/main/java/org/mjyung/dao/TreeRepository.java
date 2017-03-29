@@ -21,7 +21,7 @@ import java.util.List;
  * @author mjyung
  * @since 2017.03.20
  */
-@Transactional
+@Transactional(readOnly = true)
 public interface TreeRepository extends JpaRepository<Depart, String>, JpaSpecificationExecutor<Depart> {
 
     /**

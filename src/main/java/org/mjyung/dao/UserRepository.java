@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mjyung
  *
  */
-@Transactional
 public interface UserRepository extends JpaRepository<User, String>,
 		JpaSpecificationExecutor<User> {
 

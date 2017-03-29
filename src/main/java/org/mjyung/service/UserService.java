@@ -4,6 +4,7 @@ import org.mjyung.dao.UserRepository;
 import org.mjyung.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @since 2017.03.13
  */
 @Service(value = "userService")
+@Transactional(readOnly = true)
 public class UserService {
 
 	@Autowired
