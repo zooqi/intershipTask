@@ -103,6 +103,7 @@
 								$.messager.alert('提示', '删除成功！');
 								reset();
 								setTimeout("expandAll();", 500);
+								window.parent.tabsClose();  
 							} else {
 								$.messager.alert('提示', '删除失败，请稍后再试！');
 							}
@@ -114,6 +115,7 @@
 
 		/*更新用户信息*/
 		$('#user_edit').click(function() {
+			
 			$.messager.confirm('确认', '确认保存吗？', function(r) {
 				if (r) {
 					$.ajax({
@@ -122,7 +124,8 @@
 						data : $('#user_table_fm').serialize(),
 						success : function(data) {
 							if (data.success) {
-								$.messager.alert('提示', '保存成功！');
+								$.messager.alert('提示', '保存成功！'); 
+								//window.parent.updateTab('depart.jsp?departId='+'user.userId');
 								$('#user_edit_dlg').dialog('close');
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');

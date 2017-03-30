@@ -272,6 +272,7 @@
 								$.messager.alert('提示', '删除成功！');
 								reset();
 								setTimeout("expandAll();", 500);
+								window.parent.tabsClose();  
 							} else {
 								$.messager.alert('提示', '删除失败，请稍后再试！');
 							}

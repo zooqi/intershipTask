@@ -76,6 +76,7 @@
 		curAsyncCount++;
 	}
 
+	/* 异步加载成功  */
 	function onAsyncSuccess(event, treeId, treeNode, msg) {
 		curAsyncCount--;
 		if (curStatus == "expand") {
@@ -192,6 +193,20 @@
 			color : "#333",
 			"font-weight" : "normal"
 		};
+	}
+
+	/* 刷新tabs */
+	function updateTab(url) {
+		var tab = $('#tree_tabs').tabs('getSelected');//获取当前选中tabs  
+		var index = $('#tree_tabs').tabs('getTabIndex', tab);//获取当前选中tabs的index  
+		$('#tree_tabs').tabs('getTab', index).panel('refresh', url);
+	}
+
+	/* 关闭tabs */
+	function tabsClose() {
+		var tab = $('#tree_tabs').tabs('getSelected');//获取当前选中tabs  
+		var index = $('#tree_tabs').tabs('getTabIndex', tab);//获取当前选中tabs的index  
+		$('#tree_tabs').tabs('close', index);//关闭对应index的tabs  
 	}
 
 	var key;
