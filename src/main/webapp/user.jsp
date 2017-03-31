@@ -32,7 +32,7 @@
 					<td width="140" bgcolor="#ffffff" colspan="3"><input
 						name="userId1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center; width: 400px; width: 85%;"
-						readOnly="true" value='${user.userId}' /></td>
+						readOnly="true" value='${user.userId}' id='user_userId' /></td>
 				</tr>
 				<tr>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">用户简称</td>
@@ -48,11 +48,11 @@
 				</tr>
 
 				<tr>
-					<td width="60" style="text-align: center;" bgcolor="#ffffff">中文名</td>
-					<td width="120" bgcolor="#ffffff"><input
+					<td width="95" style="text-align: center;" bgcolor="#ffffff">中文名</td>
+					<td width="140" bgcolor="#ffffff"><input
 						name="userChineseName1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${user.userChineseName}' /></td>
+						value='${user.userChineseName}'></td>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">年龄</td>
 					<td width="140" bgcolor="#ffffff"><input name="userAge1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
@@ -61,26 +61,26 @@
 				<tr>
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">性别</td>
 					<td width="120" bgcolor="#ffffff"><input
-						name="userChineseName1"
+						name="userSex1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${user.userSex}' /></td>
 
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">职务</td>
 					<td width="120" bgcolor="#ffffff"><input
-						name="userChineseName1"
+						name="userPotision1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${user.userPosition}' /></td>
 				</tr>
 				<tr>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">学历</td>
 					<td width="140" bgcolor="#ffffff"><input
-						name="userChineseName1"
+						name="userEducation1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${user.userEducation}' /></td>
 
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">职称</td>
 					<td width="120" bgcolor="#ffffff"><input
-						name="userChineseName1"
+						name="userTitle1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${user.userTitle}' /></td>
 				</tr>
@@ -115,7 +115,6 @@
 
 		/*更新用户信息*/
 		$('#user_edit').click(function() {
-			
 			$.messager.confirm('确认', '确认保存吗？', function(r) {
 				if (r) {
 					$.ajax({
@@ -125,7 +124,7 @@
 						success : function(data) {
 							if (data.success) {
 								$.messager.alert('提示', '保存成功！'); 
-								//window.parent.updateTab('depart.jsp?departId='+'user.userId');
+								window.parent.updateTab('getUserId?userId='+$('#user_userId').val());
 								$('#user_edit_dlg').dialog('close');
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');

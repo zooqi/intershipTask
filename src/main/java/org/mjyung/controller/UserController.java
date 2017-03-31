@@ -151,6 +151,9 @@ public class UserController {
 		if (userAge1 != null && !userAge1.equals("")) {
 			a = Integer.parseInt(userAge1);
 		}
+		
+		System.out.println("Controller"+userChineseName1);
+		
 		userService.updateUser(userId1, userAbbreviation1, a, userBeforeName1,
 				userChineseName1, userEducation1, userPosition1, userSex1,
 				userTitle1);

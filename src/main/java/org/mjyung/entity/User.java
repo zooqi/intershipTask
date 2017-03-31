@@ -11,10 +11,12 @@ import java.io.Serializable;
  * @since 2017.03.13
  * 
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
 
+	@SuppressWarnings("unused")
 	private static final Long serialVersionUID = 7419229779731522702L;
 
 	/**

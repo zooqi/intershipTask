@@ -352,6 +352,7 @@
 						success : function(data) {
 							if (data.success) {
 								$.messager.alert('提示', '保存成功！');
+								window.parent.updateTab('getDepartId?departId='+$('#depart_departId').val());
 								$('#depart_edit_dlg').dialog('close');
 							} else {
 								$.messager.alert('提示', '保存失败，请稍后再试！');
