@@ -47,12 +47,25 @@ public class DepartFiliationService {
 	}
 
 	/**
-	 * 注册关系
+	 * 添加部门
 	 *
-	 * @param departFiliation
-	 *            两部门之间的关系
+	 * @param departId
+	 *            父部门departId
+	 * @param departAbbreviation
+	 *            部门简称
+	 * @param departBeforeName
+	 *            部门曾用名
+	 * @param departCommisionOffic
+	 *            是否为执法办
+	 * @param departEnable
+	 *            是否启动
 	 */
-	public void register(DepartFiliation departFiliation) {
+	public void register(String id, String departId) {
+
+		DepartFiliation departFiliation = new DepartFiliation();
+		departFiliation.setDepartId(departId);
+		departFiliation.setSubDepartId(id);
+
 		repository.save(departFiliation);
 	}
 }

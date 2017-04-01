@@ -48,9 +48,9 @@
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departAbbreviation}'></td>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">是否一级部门</td>
-					<td width="140" bgcolor="#ffffff"><input name="departMain1"
+					<td width="140" bgcolor="#ffffff"><input name="departMain1" readOnly="true"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
-						value='${depart.departMain}'></td>
+						value='${depart.departMain}' ></td>
 				</tr>
 				<tr>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">中文名</td>
@@ -66,12 +66,12 @@
 				</tr>
 				<tr>
 					<td width="60" style="text-align: center;" bgcolor="#ffffff">是否执法办</td>
-					<td width="120" bgcolor="#ffffff"><input
+					<td width="120" bgcolor="#ffffff"><input 
 						name="departCommisionOffic1"
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departCommisionOffic}'></td>
 					<td width="95" style="text-align: center;" bgcolor="#ffffff">是否启动</td>
-					<td width="140" bgcolor="#ffffff"><input name="departEnable1"
+					<td width="140" bgcolor="#ffffff"><input name="departEnable1" 
 						style="border: 0px; font-family: '宋体'; font-size: 18px; text-align: center;"
 						value='${depart.departEnable}'></td>
 				</tr>
@@ -116,14 +116,9 @@
 								class="easyui-validatebox" name="departChineseName"
 								style="border: 0px; width: 130px"></input></td>
 							<td width="60" style="text-align: center;">是否一级部门</td>
-							<td width="120" style="text-align: center;"><select
-								class="easyui-combobox" name="departMain"
-								data-options="validType:'length[0,32]'"
-								style="width: 144px; height: 23px">
-									<option value="   "></option>
-									<option value="true">true</option>
-									<option value="false">false</option>
-							</select></td>
+							<td width="120" style="text-align: center;"><input
+								class="easyui-validatebox" name="departMain" value="false"
+								style="border: 0px; width: 130px;text-align: center;" readOnly="true" /></td>
 						</tr>
 						<tr>
 							<td width="60" style="text-align: center;">是否删除</td>

@@ -38,8 +38,49 @@ public class DepartService {
 	 * @param depart
 	 *            部门对象
 	 */
-	public void addDepart(Depart depart) {
-		Objects.requireNonNull(depart, "depart不能为null!");
+	public void addDepart(String id, String departId,
+			String departAbbreviation, String departBeforeName,
+			String departCommisionOffic, String departEnable,
+			String departDelete, String departChineseName, String departMain,
+			String departArrayNumber) {
+		Objects.requireNonNull(departId, "departId不能为null!");
+
+		// 添加部门
+		Depart depart = new Depart();
+		depart.setDepartId(id);
+		depart.setDepartAbbreviation(departAbbreviation);
+		depart.setDepartBeforeName(departBeforeName);
+		Boolean a;
+		if ("true".equals(departCommisionOffic)
+				|| "是".equals(departCommisionOffic)) {
+			a = true;
+		} else {
+			a = false;
+		}
+		depart.setDepartCommisionOffic(a);
+		Boolean b;
+		if ("true".equals(departEnable) || "是".equals(departEnable)) {
+			b = true;
+		} else {
+			b = false;
+		}
+		depart.setDepartEnable(b);
+		Boolean c;
+		if ("true".equals(departDelete) || "是".equals(departDelete)) {
+			c = true;
+		} else {
+			c = false;
+		}
+		depart.setDepartDelete(c);
+		Boolean d;
+		if ("true".equals(departMain) || "是".equals(departMain)) {
+			d = true;
+		} else {
+			d = false;
+		}
+		depart.setDepartDelete(d);
+		depart.setDepartArrayNumber(departArrayNumber);
+		depart.setDepartChineseName(departChineseName);
 
 		departDepository.save(depart);
 	}
@@ -75,7 +116,7 @@ public class DepartService {
 	public void updateDepart(String departId, String departAbbreviation,
 			String departBeforeName, Boolean departCommisionOffic,
 			Boolean departEnable, Boolean departDelete, Boolean departMain,
-			String departChineseName,String departArrayNumber) {
+			String departChineseName, String departArrayNumber) {
 		Objects.requireNonNull(departId, "departId不能为null!");
 
 		Depart depart = departDepository.findOne(departId);

@@ -4,7 +4,7 @@
          version="3.0">
 
     <welcome-file-list>
-        <welcome-file>tree.jsp</welcome-file>
+        <welcome-file>/WEB-INF/tree.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- 实例化Spring容器 -->

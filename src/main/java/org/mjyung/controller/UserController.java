@@ -5,7 +5,6 @@ import java.io.Writer;
 
 import org.mjyung.entity.User;
 import org.mjyung.service.UserService;
-import org.mjyung.util.IDUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +37,7 @@ public class UserController {
 	public String getUserId(String userId, HttpServletRequest request) {
 		User user = userService.getUser(userId);
 		request.setAttribute("user", user);
-		return "user";
+		return "WEB-INF/user";
 	}
 
 	/**
@@ -79,7 +78,6 @@ public class UserController {
 	 *            用户登录名
 	 * @param userTitle
 	 *            用户职称
-	 * @return
 	 */
 	@RequestMapping("/addUser")
 	public void addUser(HttpServletResponse response, Writer writer,
@@ -87,30 +85,12 @@ public class UserController {
 			String userAbbreviation, String userAge, String userBeforeName,
 			String userChineseName, String userEducation, String userPosition,
 			String userLoginName, String userTitle) throws IOException {
-		String userId = IDUtils.generateID();
 
 		response.setContentType("application/json;charset=UTF-8");
 
-		User user = new User();
-
-		user.setUserId(userId);
-
-		int a = 0;
-		if (userAge != null && !userAge.equals("")) {
-			a = Integer.parseInt(userAge);
-		}
-		user.setUserAge(a);
-
-		user.setUserAbbreviation(userAbbreviation);
-		user.setUserBeforeName(userBeforeName);
-		user.setUserChineseName(userChineseName);
-		user.setUserEducation(userEducation);
-		user.setUserLoginName(userLoginName);
-
-		user.setUserPosition(userPosition);
-		user.setDepartId(departId);
-
-		userService.addUser(user);
+		userService.addUser(departId, userAbbreviation, userAge,
+				userBeforeName, userChineseName, userEducation, userPosition,
+				userLoginName, userTitle);
 		writer.write("{\"success\":true}");
 	}
 
@@ -151,9 +131,9 @@ public class UserController {
 		if (userAge1 != null && !userAge1.equals("")) {
 			a = Integer.parseInt(userAge1);
 		}
-		
-		System.out.println("Controller"+userChineseName1);
-		
+
+		System.out.println("Controller" + userChineseName1);
+
 		userService.updateUser(userId1, userAbbreviation1, a, userBeforeName1,
 				userChineseName1, userEducation1, userPosition1, userSex1,
 				userTitle1);

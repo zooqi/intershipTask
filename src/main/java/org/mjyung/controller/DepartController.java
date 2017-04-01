@@ -1,7 +1,6 @@
 package org.mjyung.controller;
 
 import org.mjyung.entity.Depart;
-import org.mjyung.entity.DepartFiliation;
 import org.mjyung.service.DepartFiliationService;
 import org.mjyung.service.DepartService;
 import org.mjyung.service.UserService;
@@ -54,7 +53,7 @@ public class DepartController {
 
 		request.setAttribute("depart", depart);
 
-		return "depart";
+		return "/WEB-INF/depart";
 	}
 
 	/**
@@ -98,55 +97,16 @@ public class DepartController {
 			String departArrayNumber) throws IOException {
 		response.setContentType("application/json;charset=UTF-8");
 
-		// 自动生成departId
+		/* 自动生成departId */
 		String id = IDUtils.generateID();
 
-		// 添加部门
-		Depart depart = new Depart();
-		depart.setDepartId(id);
-		depart.setDepartAbbreviation(departAbbreviation);
-		depart.setDepartBeforeName(departBeforeName);
-		Boolean a;
-		if ("true".equals(departCommisionOffic)) {
-			a = true;
-		} else {
-			a = false;
-		}
-		depart.setDepartCommisionOffic(a);
-		Boolean b;
-		if ("true".equals(departEnable)) {
-			b = true;
-		} else {
-			b = false;
-		}
-		depart.setDepartEnable(b);
-		Boolean c;
-		if ("true".equals(departDelete)) {
-			c = true;
-		} else {
-			c = false;
-		}
-		depart.setDepartDelete(c);
-		Boolean d;
-		if ("true".equals(departMain)) {
-			d = true;
-		} else {
-			d = false;
-		}
-		depart.setDepartDelete(d);
-		depart.setDepartArrayNumber(departArrayNumber);
-		depart.setDepartChineseName(departChineseName);
-		departService.addDepart(depart);
+		/* 添加部门 */
+		departService.addDepart(id, departId, departAbbreviation,
+				departBeforeName, departCommisionOffic, departEnable,
+				departDelete, departChineseName, departMain, departArrayNumber);
 
-		/**
-		 * 添加部门和子部门之间的关系
-		 */
-		DepartFiliation departFiliation = new DepartFiliation();
-
-		departFiliation.setDepartId(departId);
-		departFiliation.setSubDepartId(id);
-
-		departFiliationService.register(departFiliation);
+		/* 添加部门和子部门之间的关系 */
+		departFiliationService.register(id, departId);
 
 		writer.write("{\"success\":true}");
 	}
